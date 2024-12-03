@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraScript : MonoBehaviour
 {
     public Transform Player;       // The player to follow
-    public Vector3 offset = new Vector3(0, 3, -20); // Position offset from the player
+    public Vector3 offset = new Vector3(0, 5, -20); // Position offset from the player
     public float followSpeed = 5f; // Speed of camera following
 
     void LateUpdate()
