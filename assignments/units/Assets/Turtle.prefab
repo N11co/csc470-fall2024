@@ -12,12 +12,13 @@ GameObject:
   - component: {fileID: 7001953199143685977}
   - component: {fileID: 7030282664168884271}
   - component: {fileID: 6963398753436797012}
-  m_Layer: 0
+  - component: {fileID: 6861871215170024730}
+  m_Layer: 8
   m_Name: Turtle
-  m_TagString: Untagged
+  m_TagString: unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1105320547112249910
 Transform:
@@ -68,8 +69,8 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 1
-  m_Radius: 1
+  m_Height: 0.5
+  m_Radius: 1.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
@@ -90,12 +91,12 @@ MonoBehaviour:
   unitName: 
   bio: 
   stats: 
-  nma: {fileID: 0}
+  nma: {fileID: 6963398753436797012}
+  destination: {x: 0, y: 0, z: 0}
   bodyRenderer: {fileID: 8607172100987537387}
   selected: 0
   normalColor: {r: 0.43529415, g: 0.6, b: 0.34509805, a: 1}
   selectedColor: {r: 1, g: 0, b: 0.025664806, a: 0.972549}
-  destination: {x: 0, y: 0, z: 0}
 --- !u!195 &6963398753436797012
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -118,6 +119,33 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!54 &6861871215170024730
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 934034059087559130}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1085171981026122903
 GameObject:
   m_ObjectHideFlags: 0

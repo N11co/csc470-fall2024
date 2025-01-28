@@ -6,6 +6,12 @@ TagManager:
   tags:
   - ground
   - unit
+  - seaweedFarm
+  - seaweedShop
+  - eggCenter
+  - seaweedCrates
+  - crateCenter
+  - workerNPC
   layers:
   - Default
   - TransparentFX
@@ -15,7 +21,7 @@ TagManager:
   - UI
   - 
   - ground
-  - 
+  - unit
   - 
   - 
   - 
