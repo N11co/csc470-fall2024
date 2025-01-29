@@ -13,6 +13,8 @@ TagManager:
   - bottleCap
   - snackBox
   - seeweed
+  - seaweed
+  - wall
   layers:
   - Default
   - TransparentFX

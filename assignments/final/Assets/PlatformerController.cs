@@ -7,7 +7,6 @@ public class PlatformerController : MonoBehaviour
     public Transform cameraTransform;
 
     public CharacterController cc;
-    //float rotateSpeed = 90;
     float moveSpeed = 6f;
     float jumpVelocity = 8;
 
@@ -19,11 +18,6 @@ public class PlatformerController : MonoBehaviour
     float dashAmount = 8;
     float dashVelocity = 0;
     float friction = -2.8f;
-
-
-    GameObject movingPlatform;
-    Vector3 previousMovingPlatformPosition;
-
 
     // This will keep track of how long we have been falling, we will use this 
     // for "coyote time" (keeping track of how long it has been since we have
@@ -41,6 +35,8 @@ public class PlatformerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        GameManager.instance.UpdatePlayerPos(transform.position);
+
         float hAxis = Input.GetAxis("Horizontal");
         float vAxis = Input.GetAxis("Vertical");
 
@@ -49,8 +45,11 @@ public class PlatformerController : MonoBehaviour
         // NOTE: If the player isn't pressing left or right, hAxis will be 0 and there will be no rotation
         // transform.Rotate(0, rotateSpeed * hAxis * Time.deltaTime, 0);
 
-        if (Input.GetKeyDown(KeyCode.LeftShift)) {
+        if (Input.GetKeyDown(KeyCode.LeftShift) && GameManager.instance.dashCount > 0) 
+        {
             dashVelocity = dashAmount;
+            GameManager.instance.dashCount--;
+            GameManager.instance.dashCountText.text = "Dash: " + GameManager.instance.dashCount;
         }
         // Slow the dash down, and keep it from going below zero (using clamp)
         dashVelocity += friction * Time.deltaTime;
@@ -112,12 +111,6 @@ public class PlatformerController : MonoBehaviour
 
         amountToMove *= Time.deltaTime;
 
-        // Deal with moving platform. Add the amount that the platform moved to amountToMove
-        //if (movingPlatform != null) {
-        //    Vector3 amountPlatformMoved = movingPlatform.transform.position - previousMovingPlatformPosition;
-        //    amountToMove += amountPlatformMoved;
-        //    previousMovingPlatformPosition = movingPlatform.transform.position;
-        //}
 
         // This will move the player according to the forward vector and the yVelocity using the
         // CharacterController.
@@ -129,16 +122,36 @@ public class PlatformerController : MonoBehaviour
         // transform.rotation = Quaternion.LookRotation(amountToMove);
     }
 
-    //void OnTriggerEnter(Collider other) {
-    //    if (other.CompareTag("MovingPlatform")) {
-    //        movingPlatform = other.gameObject;
-    //        previousMovingPlatformPosition = movingPlatform.transform.position;
-    //    }
-    //}
+    public void IncreaseSpeed(float amt)
+    {
+        moveSpeed += amt;
+    }
 
-    //void OnTriggerExit(Collider other) {
-    //    if (other.CompareTag("MovingPlatform")) {
-    //        movingPlatform = null;
-    //    }
-    //}
+    public void OnTriggerEnter(Collider other) {
+        if (other.CompareTag("seaweed")) 
+        {
+            GameManager.instance.AddScore(1);
+            Destroy(other.gameObject);
+        }
+        if (other.CompareTag("bottleCap"))
+        {
+            if (GameManager.instance.score > 0)
+            {
+                GameManager.instance.AddScore(-1);
+            }
+            Destroy(other.gameObject);
+        }
+        if ((other.CompareTag("crab")) || (other.CompareTag("bird")))
+        {
+            GameManager.instance.DamageToPlayer(1);
+            if (GameManager.instance.score > 0)
+            {
+                GameManager.instance.AddScore(-1);
+            }
+        }
+        if (other.CompareTag("wall"))
+        {
+            transform.Rotate(0,180,0, Space.World);
+        }
+    }
 }

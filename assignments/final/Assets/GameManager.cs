@@ -12,6 +12,7 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    public PlatformerController player;
 
     public static GameManager instance;
     
@@ -19,14 +20,22 @@ public class GameManager : MonoBehaviour
     public Transform playerTransform;
     
     public int lives = 3;  //maybe 3 lives? 
-    public int score;
-    public int projectileCount = 0;
+    public int score = 0;
+    public int dashCount = 1;
 
     public TMP_Text controlInfoText;
     public TMP_Text scoreText;
     public TMP_Text screenText;
     public TMP_Text livesCountText;
-    public TMP_Text projectileCountText;
+    public TMP_Text dashCountText;
+
+    bool isDead = false;
+
+    public GameObject popUpWindow;
+
+    //to store last known player position
+    public Vector3 lastPlayerPos;
+
     
     //singleton 
     void OnEnable()
@@ -41,68 +50,100 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //update player's last known position
+    public void UpdatePlayerPos(Vector3 pos)
+    {
+        lastPlayerPos = pos;
+    }
+
+    public Vector3 GetLastPlayerPos()
+    {
+        return lastPlayerPos;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        Debug.Log("Starting lives: " + lives);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    void OnTriggerEnter(Collider other) {
-        //if (other.CompareTag("MovingPlatform")) {
-        //   MovingPlatform = other.gameObject;
-        //    previousMovingPlatformPosition = MovingPlatform.transform.position;
-        //}
-        if (other.CompareTag("seaweed"))
+        if (lives == 0)
         {
-            score++;
-            projectileCount++;
-            //dashCount++;
-
-            Destroy(other.gameObject);
-
-            //dashCountText.text = "Dash Count: " + dashCount;
-            scoreText.text = "Score: " + score;
-            projectileCountText.text = "Projectiles: " + projectileCount;
-
-            //check to see if score is 10, if so increase size of player(turtle)
-            if (score == 10)
-            {
-                playerTransform.localScale *= 1.5f; 
-            }
+            isDead = true;
         }
-        else if (other.CompareTag("bottleCap"))
+
+        if (isDead)
         {
-            score = score - 1;
-            projectileCount = projectileCount - 1;
-            Destroy(other.gameObject);
-            scoreText.text = "Score: " + score;
-            projectileCountText.text = "Projectiles: " + projectileCount;
-            if (score < 0)
-            {
-                screenText.text = "You died.";
-            }
-        }
-        else if ((other.CompareTag("crab")) || (other.CompareTag("bird")))
-        {
-            //isDead = true;
-            lives = lives - 1;
-            score = score - 1;
-            if (score < 0)
-            {
-                screenText.text = "You died.";
-            }
+            screenText.text = "You Died!";
+            return;
         }
     }
 
-    //void OnTriggerExit(Collider other) {
-    //   if (other.CompareTag("MovingPlatform")) {
-    //        MovingPlatform = null;
-    //    }
-    //}
+    //add score when turtle player collides with seaweed objects
+    public void AddScore(int point)
+    {
+        score += point;
+        scoreText.text = "Score: " + score;
+        Debug.Log("Seaweed collected. Total: " + score);
+
+        //add dash after every 3 seaweed collected
+        if (score % 3 == 0)
+        {
+            dashCount++;
+        }
+
+        dashCountText.text = "Dash: " + dashCount;
+
+        if (score % 5 == 0)
+        {
+            Vector3 newScale = playerTransform.localScale * 1.25f;
+            playerTransform.localScale = newScale;
+
+            if (player != null)
+            {
+                player.IncreaseSpeed(2f);
+            }
+
+        }
+
+        //once 15 collected end game
+        if (score >= 15)
+        {
+            EndGame();
+        }
+    }
+
+    public void OpenInfoSheet()
+    {
+        popUpWindow.SetActive(true);
+    }
+
+    public void ClosePopUpWindow()
+    {
+        popUpWindow.SetActive(false);
+    }
+
+    //take away a life when turtle collides with enemy NPCs 
+    public void DamageToPlayer(int damage)
+    {
+        lives -= damage;
+        livesCountText.text = "Lives: " + lives;
+        Debug.Log("Collided into enemy. Total lives: " + lives);
+    }
+
+    public void AddDash(int amt)
+    {
+        dashCount += amt;
+        dashCountText.text = "Dash: " + dashCount;
+        //Debug.Log("Collided into enemy. Total projectiles: " + projectileCount);
+    }
+
+    public void EndGame()
+    {
+        screenText.text = "You Win!";
+        Time.timeScale = 0;
+    }
 }

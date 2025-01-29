@@ -259,9 +259,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4911332657064925469}
   - component: {fileID: 4624104491648616222}
-  - component: {fileID: 2148748147198568472}
   - component: {fileID: 2710295229980929614}
   - component: {fileID: 7809166224872027948}
+  - component: {fileID: 5187251875778096}
   m_Layer: 0
   m_Name: bird
   m_TagString: bird
@@ -323,18 +323,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0.8}
---- !u!114 &2148748147198568472
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2246236231744616947}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e13ab7ac31ecb644952c4bb88ae03fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!195 &2710295229980929614
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -380,6 +368,20 @@ CapsuleCollider:
   m_Height: 3.3202462
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0.91200495}
+--- !u!114 &5187251875778096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2246236231744616947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85b0fbe20254f874291da4fcff201d3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 1
+  isChasing: 0
 --- !u!1 &2294535515185123950
 GameObject:
   m_ObjectHideFlags: 0

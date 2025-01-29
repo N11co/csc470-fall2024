@@ -12,10 +12,8 @@ GameObject:
   - component: {fileID: 7001953199143685977}
   - component: {fileID: 6963398753436797012}
   - component: {fileID: 372743981444852605}
-  - component: {fileID: 1920946823558632682}
-  - component: {fileID: 7487119044465207120}
   - component: {fileID: 8897422028974120205}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Turtle
   m_TagString: turtle
   m_Icon: {fileID: 0}
@@ -114,39 +112,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 0}
   cc: {fileID: 0}
---- !u!114 &1920946823558632682
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 934034059087559130}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a87a733931f7ce4690d61fc2a76fa76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!65 &7487119044465207120
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 934034059087559130}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.99984, y: 1.107986, z: 1}
-  m_Center: {x: -0.14224571, y: 0.31288683, z: 2.450767e-16}
 --- !u!54 &8897422028974120205
 Rigidbody:
   m_ObjectHideFlags: 0

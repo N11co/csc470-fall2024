@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 2349617864939910360}
   m_Layer: 0
   m_Name: seeweed
-  m_TagString: seeweed
+  m_TagString: seaweed
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -135,5 +135,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.608696, y: 0.4296822, z: 0.64479417}
+  m_Size: {x: 0.76, y: 0.62, z: 0.82}
   m_Center: {x: -0.011611313, y: -0.005219857, z: -0.014784416}
